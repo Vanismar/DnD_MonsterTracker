@@ -17,10 +17,7 @@ SOURCES += \
     monsterwidget.cpp
 
 HEADERS += \
-    Orc.h \
     addmonsterdialog.h \
-    dragon.h \
-    goblin.h \
     mainwindow.h \
     monsterfactory.h \
     monsterinstance.h \
