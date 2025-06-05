@@ -9,11 +9,23 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    addmonsterdialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    monsterfactory.cpp \
+    monsterinstance.cpp \
+    monsterwidget.cpp
 
 HEADERS += \
-    mainwindow.h
+    Orc.h \
+    addmonsterdialog.h \
+    dragon.h \
+    goblin.h \
+    mainwindow.h \
+    monsterfactory.h \
+    monsterinstance.h \
+    monstertype.h \
+    monsterwidget.h
 
 FORMS += \
     mainwindow.ui
