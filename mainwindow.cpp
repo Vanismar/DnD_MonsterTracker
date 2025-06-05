@@ -1,8 +1,6 @@
 #include "MainWindow.h"
 #include "AddMonsterDialog.h"
 #include "MonsterFactory.h"
-#include "MonsterWidget.h"
-
 #include <QToolBar>
 #include <QAction>
 #include <QScrollArea>
@@ -16,8 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     toolbar->addAction(addMonsterAction);
 
     centralWidget = new QWidget(this);
-    monsterLayout = new QVBoxLayout();
-    centralWidget->setLayout(monsterLayout);
+    monsterGridLayout = new QGridLayout();
+    centralWidget->setLayout(monsterGridLayout);
 
     QScrollArea *scrollArea = new QScrollArea(this);
     scrollArea->setWidgetResizable(true);
@@ -46,6 +44,20 @@ void MainWindow::addMonsters(const QString& type, int count) {
         instance.name = QString("%1 #%2").arg(monsterType->name()).arg(currentCount);
 
         auto *widget = new MonsterWidget(instance, this);
-        monsterLayout->addWidget(widget);
+        connect(widget, &MonsterWidget::monsterDied, this, &MainWindow::removeMonster);
+
+        int row = monsterCount / columnsPerRow;
+        int col = monsterCount % columnsPerRow;
+        monsterGridLayout->addWidget(widget, row, col);
+        monsterWidgets.insert(widget);
+
+        ++monsterCount;
     }
+
+}
+
+void MainWindow::removeMonster(MonsterWidget *widget) {
+    monsterGridLayout->removeWidget(widget);
+    monsterWidgets.remove(widget);
+    widget->deleteLater();
 }
