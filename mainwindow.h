@@ -8,6 +8,7 @@
 #include <QSet>
 #include <monsterwidget.h>
 #include "MonsterStatBlock.h"
+#include "FlowLayout.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -29,6 +30,7 @@ private:
     QSet<QString> usedMonsterTypes;
     int monsterCount = 0;
     int columnsPerRow = 5;
+    FlowLayout *monsterFlowLayout = nullptr;
 
 private slots:
     void removeMonster(MonsterWidget *widget);

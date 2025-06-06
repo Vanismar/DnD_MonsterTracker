@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     addmonsterdialog.cpp \
+    flowlayout.cpp \
     main.cpp \
     mainwindow.cpp \
     monsterfactory.cpp \
@@ -19,7 +20,9 @@ SOURCES += \
 
 HEADERS += \
     addmonsterdialog.h \
+    flowlayout.h \
     mainwindow.h \
+    monsteraction.h \
     monsterfactory.h \
     monsterinstance.h \
     monsterstatblock.h \

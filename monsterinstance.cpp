@@ -17,17 +17,23 @@ MonsterInstance::MonsterInstance(std::shared_ptr<MonsterType> type) {
 }
 
 int MonsterInstance::rollDice(const QString& dice) {
-    QRegularExpression regex("(\\d+)d(\\d+)");
-    QRegularExpressionMatch match = regex.match(dice);
+    QRegularExpression regex(R"((\d+)[dD](\d+)(?:\s*([+-])\s*(\d+))?)");
+    QRegularExpressionMatch match = regex.match(dice.trimmed());
 
     if (!match.hasMatch()) return 0;
 
     int rolls = match.captured(1).toInt();
     int sides = match.captured(2).toInt();
+    QString sign = match.captured(3);
+    int modifier = match.captured(4).toInt();
+
+    if (sign == "-") modifier *= -1;
+    else if (sign.isEmpty()) modifier = 0;
 
     int total = 0;
     for (int i = 0; i < rolls; ++i) {
         total += randomBetween(1, sides);
     }
-    return total;
+
+    return total + modifier;
 }

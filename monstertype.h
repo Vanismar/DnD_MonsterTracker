@@ -1,5 +1,7 @@
 #pragma once
 #include <QString>
+#include <QList>
+#include "monsteraction.h"
 
 struct Attributes {
     int STR = 10;
@@ -16,6 +18,8 @@ public:
     virtual QString hpDice() const = 0;
     virtual int baseAC() const = 0;
     virtual Attributes attributes() const = 0;
+    virtual QList<MonsterAction> actions() const = 0;
+
 
     virtual ~MonsterType() = default;
 };
@@ -28,24 +32,26 @@ public:
     Attributes attributes() const override {
         return Attributes{ 8, 14, 10, 10, 8, 8 };
     }
-};
-
-class Dragon : public MonsterType {
-public:
-    QString name() const override { return "Dragon"; }
-    QString hpDice() const override { return "10d10"; }
-    int baseAC() const override { return 18; }
-    Attributes attributes() const override {
-        return Attributes{27, 10, 25, 16, 13, 21};
+    QList<MonsterAction> actions() const override {
+        return {
+            {"Scimitar", +4, "1d6", +2, "slashing"},
+            {"Shortbow", +4, "1d6", +2, "piercing"}
+        };
     }
 };
 
 class Orc : public MonsterType {
 public:
     QString name() const override { return "Orc"; }
-    QString hpDice() const override { return "2d8"; }
-    int baseAC() const override { return 12; }
+    QString hpDice() const override { return "2d8 + 6"; }
+    int baseAC() const override { return 13; }
     Attributes attributes() const override {
         return Attributes{16, 12, 16, 7, 11, 10};
+    }
+    QList<MonsterAction> actions() const override {
+        return {
+            {"Greataxe", +5, "1d12", +3, "slashing"},
+            {"Javelin", +5, "1d6", +3, "piercing"}
+        };
     }
 };

@@ -11,20 +11,22 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
 
     QToolBar *toolbar = addToolBar("Tools");
+
     QAction *addMonsterAction = toolbar->addAction("Add Monster");
     connect(addMonsterAction, &QAction::triggered, this, &MainWindow::openAddMonsterDialog);
+
     QAction *viewStatBlockAction = toolbar->addAction("View Stat Block");
     connect(viewStatBlockAction, &QAction::triggered, this, &MainWindow::openStatBlock);
 
-    centralWidget = new QWidget(this);
-    monsterGridLayout = new QGridLayout();
-    centralWidget->setLayout(monsterGridLayout);
+    monsterFlowLayout = new FlowLayout(5, 10, 10);
+    auto *container = new QWidget;
+    container->setLayout(monsterFlowLayout);
 
-    QScrollArea *scrollArea = new QScrollArea(this);
-    scrollArea->setWidgetResizable(true);
-    scrollArea->setWidget(centralWidget);
+    auto *scroll = new QScrollArea;
+    scroll->setWidget(container);
+    scroll->setWidgetResizable(true);
+    setCentralWidget(scroll);
 
-    setCentralWidget(scrollArea);
     setMinimumSize(800, 500);
 }
 
@@ -50,9 +52,7 @@ void MainWindow::addMonsters(const QString& type, int count) {
         auto *widget = new MonsterWidget(instance, this);
         connect(widget, &MonsterWidget::monsterDied, this, &MainWindow::removeMonster);
 
-        int row = monsterCount / columnsPerRow;
-        int col = monsterCount % columnsPerRow;
-        monsterGridLayout->addWidget(widget, row, col);
+        monsterFlowLayout->addWidget(widget);
         monsterWidgets.insert(widget);
 
         ++monsterCount;
@@ -66,7 +66,6 @@ void MainWindow::addMonsters(const QString& type, int count) {
         statBlock->show();
         statBlocks[typeName] = statBlock;
 
-        // Optional: remove from map when closed
         connect(statBlock, &QWidget::destroyed, this, [this, typeName]() {
             statBlocks.remove(typeName);
         });
@@ -74,7 +73,6 @@ void MainWindow::addMonsters(const QString& type, int count) {
 }
 
 void MainWindow::removeMonster(MonsterWidget *widget) {
-    monsterGridLayout->removeWidget(widget);
     monsterWidgets.remove(widget);
     widget->deleteLater();
 }
