@@ -3,6 +3,5 @@ an indicator of HP for enemies in TTRPG
 
 To Do/Ideas:
 add stat blocks,
-change size of monster instance block for better visual,
-add damage and heal mechanic,
+change grid layout to flow,
 add more types
