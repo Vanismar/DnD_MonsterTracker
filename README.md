@@ -2,6 +2,5 @@
 an indicator of HP for enemies in TTRPG
 
 To Do/Ideas:
-add stat blocks,
 change grid layout to flow,
 add more types
