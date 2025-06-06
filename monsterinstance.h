@@ -8,6 +8,7 @@ public:
     MonsterInstance(std::shared_ptr<MonsterType> type);
 
     QString name;
+    QString hpDice;
     int hp;
     int maxHp;
     int ac;

@@ -14,6 +14,7 @@ SOURCES += \
     mainwindow.cpp \
     monsterfactory.cpp \
     monsterinstance.cpp \
+    monsterstatblock.cpp \
     monsterwidget.cpp
 
 HEADERS += \
@@ -21,6 +22,7 @@ HEADERS += \
     mainwindow.h \
     monsterfactory.h \
     monsterinstance.h \
+    monsterstatblock.h \
     monstertype.h \
     monsterwidget.h
 
