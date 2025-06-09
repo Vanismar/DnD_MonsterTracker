@@ -25,11 +25,9 @@ private:
     QVBoxLayout *monsterLayout;
     QMap<QString, int> monsterCounters;
     QMap<QString, MonsterStatBlock*> statBlocks;
-    QGridLayout *monsterGridLayout;
     QSet<MonsterWidget*> monsterWidgets;
     QSet<QString> usedMonsterTypes;
     int monsterCount = 0;
-    int columnsPerRow = 5;
     FlowLayout *monsterFlowLayout = nullptr;
 
 private slots:

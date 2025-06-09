@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     scroll->setWidgetResizable(true);
     setCentralWidget(scroll);
 
-    setMinimumSize(800, 500);
+    setMinimumSize(840, 600);
 }
 
 void MainWindow::openAddMonsterDialog() {

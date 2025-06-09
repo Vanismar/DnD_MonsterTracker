@@ -25,6 +25,9 @@ private:
     QLabel *nameLabel;
     QLabel *acLabel;
     QLabel *hpLabel;
+    QLabel *speedLabel;
+    QLabel *climbLabel;
+    QLabel *flyLabel;
     QProgressBar *hpBar;
     QPushButton *damageButton;
     QPushButton *healButton;

@@ -12,6 +12,9 @@ public:
     int hp;
     int maxHp;
     int ac;
+    int speed;
+    int climb;
+    int fly;
 
 private:
     int rollDice(const QString& dice);

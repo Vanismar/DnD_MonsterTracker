@@ -11,7 +11,7 @@ static int randomBetween(int min, int max) {
 
 MonsterInstance::MonsterInstance(std::shared_ptr<MonsterType> type) {
     name = type->name();
-    hpDice = type->hpDice();  // save dice formula
+    hpDice = type->hpDice();
     maxHp = hp = rollDice(hpDice);
     ac = type->baseAC() + randomBetween(-1, 1);
 }

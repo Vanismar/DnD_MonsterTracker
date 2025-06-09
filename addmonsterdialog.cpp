@@ -12,7 +12,7 @@ AddMonsterDialog::AddMonsterDialog(QWidget *parent)
     monsterTypeCombo->addItems({"Goblin", "Orc"});
 
     monsterCountSpin = new QSpinBox();
-    monsterCountSpin->setRange(1, 20);
+    monsterCountSpin->setRange(1, 50);
 
     layout->addWidget(new QLabel("Select Monster Type:"));
     layout->addWidget(monsterTypeCombo);

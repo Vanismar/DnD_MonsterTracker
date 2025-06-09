@@ -15,9 +15,15 @@ struct Attributes {
 class MonsterType {
 public:
     virtual QString name() const = 0;
-    virtual QString hpDice() const = 0;
     virtual int baseAC() const = 0;
+    virtual QString hpDice() const = 0;
+    virtual int speed() const = 0;
+    virtual int climb() const = 0;
+    virtual int fly() const = 0;
     virtual Attributes attributes() const = 0;
+    virtual QString skills() const = 0;
+    virtual QString resistances() const = 0;
+    virtual QString immunities() const = 0;
     virtual QList<MonsterAction> actions() const = 0;
 
 
@@ -26,12 +32,18 @@ public:
 
 class Goblin : public MonsterType {
 public:
-    QString name() const override { return "Goblin"; }
-    QString hpDice() const override { return "2d6"; }
-    int baseAC() const override { return 15; }
+    QString name() const override { return "Goblin";}
+    int baseAC() const override { return 15;}
+    QString hpDice() const override { return "2d6";}
+    int speed() const override { return 30;}
+    int climb() const override { return 0;}
+    int fly() const override { return 0;}
     Attributes attributes() const override {
-        return Attributes{ 8, 14, 10, 10, 8, 8 };
+        return Attributes{ 8, 14, 10, 10, 8, 8};
     }
+    QString skills() const override { return "Stealth +6";}
+    QString resistances() const override { return "none";}
+    QString immunities() const override { return "none";}
     QList<MonsterAction> actions() const override {
         return {
             {"Scimitar", +4, "1d6", +2, "slashing"},
@@ -43,11 +55,17 @@ public:
 class Orc : public MonsterType {
 public:
     QString name() const override { return "Orc"; }
-    QString hpDice() const override { return "2d8 + 6"; }
     int baseAC() const override { return 13; }
+    QString hpDice() const override { return "2d8 + 6"; }
+    int speed() const override { return 30;}
+    int climb() const override { return 0;}
+    int fly() const override { return 0;}
     Attributes attributes() const override {
         return Attributes{16, 12, 16, 7, 11, 10};
     }
+    QString skills() const override { return "Intimidation +2";}
+    QString resistances() const override { return "none";}
+    QString immunities() const override { return "none";}
     QList<MonsterAction> actions() const override {
         return {
             {"Greataxe", +5, "1d12", +3, "slashing"},
@@ -55,3 +73,5 @@ public:
         };
     }
 };
+
+
