@@ -9,7 +9,7 @@ AddMonsterDialog::AddMonsterDialog(QWidget *parent)
     QVBoxLayout *layout = new QVBoxLayout(this);
 
     monsterTypeCombo = new QComboBox();
-    monsterTypeCombo->addItems({"Goblin", "Orc"});
+    monsterTypeCombo->addItems({"Goblin", "Goblin Boss", "Orc"});
 
     monsterCountSpin = new QSpinBox();
     monsterCountSpin->setRange(1, 50);

@@ -22,7 +22,6 @@ HEADERS += \
     addmonsterdialog.h \
     flowlayout.h \
     mainwindow.h \
-    monsteraction.h \
     monsterfactory.h \
     monsterinstance.h \
     monsterstatblock.h \

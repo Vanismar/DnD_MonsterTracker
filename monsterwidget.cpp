@@ -34,21 +34,14 @@ MonsterWidget::MonsterWidget(const MonsterInstance& instance, QWidget *parent)
     buttonLayout->addWidget(healButton);
 
     gridLayout->addWidget(acLabel, 0, 0);
-    gridLayout->addWidget(hpLabel, 1, 0);
-    gridLayout->addWidget(hpBar,   2, 0);
-    QLabel *speedLabel = new QLabel(QString("Speed: %1").arg(instance.speed), this);
-    QLabel *climbLabel = new QLabel(QString("Climb: %1").arg(instance.climb), this);
-    QLabel *flyLabel   = new QLabel(QString("Fly: %1").arg(instance.fly), this);
-    gridLayout->addWidget(speedLabel, 0, 1);
-    gridLayout->addWidget(climbLabel, 1, 1);
-    gridLayout->addWidget(flyLabel,   2, 1);
+    gridLayout->addWidget(hpLabel, 0, 1);
+    gridLayout->addWidget(hpBar,   1, 0, 1, 2);
 
     gridLayout->addLayout(buttonLayout, 3, 0, 1, 2);
     group->setLayout(gridLayout);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     mainLayout->addWidget(group);
-    setLayout(mainLayout);
 
     updateDisplay();
     //setMaximumSize(200, 160);

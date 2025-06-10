@@ -1,7 +1,6 @@
 #pragma once
 #include <QWidget>
 #include "MonsterType.h"
-#include "monsteraction.h"
 #include <cmath>
 #include <QLabel>
 #include <QVBoxLayout>
@@ -15,7 +14,7 @@ class MonsterStatBlock : public QWidget {
 public:
     explicit MonsterStatBlock(const MonsterType& type, QWidget *parent = nullptr);
 
-    void setActions(const QList<MonsterAction> &actions);
+    void setActions(const QList<Action> &actions);
 
 private:
     QVBoxLayout *mainLayout;
