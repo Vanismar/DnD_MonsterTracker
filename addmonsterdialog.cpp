@@ -10,7 +10,7 @@ AddMonsterDialog::AddMonsterDialog(QWidget *parent)
 
     monsterTypeCombo = new QComboBox();
     monsterTypeCombo->addItems({
-        "Goblin", "Goblin Boss", "Orc", "Spectator", "Twig Blight"
+        "Bugbear", "Bugbear Chief", "Doppelganger","Goblin", "Goblin Boss", "Orc", "Spectator", "Twig Blight"
     });
 
     monsterCountSpin = new QSpinBox();

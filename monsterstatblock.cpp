@@ -41,11 +41,21 @@ MonsterStatBlock::MonsterStatBlock(const MonsterType& type, QWidget *parent)
     layout->addLayout(attrLayout);
     layout->addSpacing(5);
 
-    layout->addWidget(new QLabel("<b>Saving Throws:</b> " + type.saving_throws()));
+    if (!type.saving_throws().isEmpty()) {
+        layout->addWidget(new QLabel("<b>Saving Throws:</b> " + type.saving_throws()));
+    }
+    if (!type.skills().isEmpty()) {
     layout->addWidget(new QLabel("<b>Skills:</b> " + type.skills()));
+    }
+    if (!type.vulnerabilities().isEmpty()) {
     layout->addWidget(new QLabel("<b>Vulnerabilities:</b> " + type.vulnerabilities()));
+    }
+    if (!type.resistances().isEmpty()) {
     layout->addWidget(new QLabel("<b>Resistances:</b> " + type.resistances()));
+    }
+    if (!type.immunities().isEmpty()) {
     layout->addWidget(new QLabel("<b>Immunities:</b> " + type.immunities()));
+    }
     layout->addWidget(new QLabel("<b>Senses:</b> " + type.senses()));
     layout->addWidget(new QLabel("<b>Languages:</b> " + type.languages()));
 
@@ -53,12 +63,14 @@ MonsterStatBlock::MonsterStatBlock(const MonsterType& type, QWidget *parent)
         layout->addWidget(new QLabel("<b>Traits:</b>"));
         traitsLabel = new QLabel(this);
         traitsLabel->setTextFormat(Qt::RichText);
+        traitsLabel->setWordWrap(true);
         layout->addWidget(traitsLabel);
         setTraits(type.traits());
     }
 
     actionsLabel = new QLabel(this); //actions
     actionsLabel->setTextFormat(Qt::RichText);
+    actionsLabel->setWordWrap(true);
     layout->addWidget(new QLabel("<b>Actions:</b>"));
     layout->addWidget(actionsLabel);
     setActions(type.actions());
@@ -67,6 +79,7 @@ MonsterStatBlock::MonsterStatBlock(const MonsterType& type, QWidget *parent)
         layout->addWidget(new QLabel("<b>Reactions:</b>"));
         reactionsLabel = new QLabel(this);
         reactionsLabel->setTextFormat(Qt::RichText);
+        reactionsLabel->setWordWrap(true);
         layout->addWidget(reactionsLabel);
         setReactions(type.reactions());
     }
@@ -77,7 +90,7 @@ MonsterStatBlock::MonsterStatBlock(const MonsterType& type, QWidget *parent)
 void MonsterStatBlock::setActions(const QList<Action> &actions) {
     QStringList actionStrings;
     for(const Action &action : actions) {
-        QString actionText = QString("%1: %2 %3 %4")
+        QString actionText = QString("<b>%1:</b> %2 %3 %4")
                                  .arg(action.name)
                                  .arg(action.toHit)
                                  .arg(action.damageDice)
@@ -92,7 +105,7 @@ void MonsterStatBlock::setActions(const QList<Action> &actions) {
 void MonsterStatBlock::setTraits(const QList<Trait> &traits) {
     QStringList traitStrings;
     for(const Trait &trait : traits) {
-        QString traitText = QString("%1: %2")
+        QString traitText = QString("<b>%1:</b> %2")
                                 .arg(trait.name)
                                 .arg(trait.detail);
         traitStrings << traitText;
@@ -103,7 +116,7 @@ void MonsterStatBlock::setTraits(const QList<Trait> &traits) {
 void MonsterStatBlock::setReactions(const QList<Reaction> &reactions) {
     QStringList reactionStrings;
     for(const Reaction &reaction : reactions) {
-        QString reactionText = QString("%1: %2")
+        QString reactionText = QString("<b>%1:</b> %2")
                                    .arg(reaction.name)
                                    .arg(reaction.detail);
         reactionStrings << reactionText;

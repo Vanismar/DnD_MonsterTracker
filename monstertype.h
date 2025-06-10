@@ -53,47 +53,6 @@ public:
     virtual ~MonsterType() = default;
 };
 
-/*
-class  : public MonsterType {
-public:
-    QString name() const override { return "";}
-    int baseAC() const override { return ;}
-    QString hpDice() const override { return "";}
-    int speed() const override { return ;}
-    int burrow() const override { return ;}
-    int climb() const override { return ;}
-    int fly() const override { return ;}
-    int swim() const override { return ;}
-    Attributes attributes() const override {
-        return Attributes{ , , , , , }; //str, dex, con, int, wis, cha
-    }
-    QString saving_throws() const override { return "";}
-    QString skills() const override { return "";}
-    QString vulnerabilities() const override { return "";}
-    QString resistances() const override { return "";}
-    QString immunities() const override { return "";}
-    QString senses() const override { return ", p.P. ";}
-    QString languages() const override { return "";}
-    QList<Trait> traits() const override {
-        return {
-            {"", ""},
-            {"", ""}
-        };
-    }
-    QList<Action> actions() const override {
-        return {
-            {"", " to hit", "", ""},
-            {"", " to hit", "", ""}
-        };
-    }
-    QList<Reaction> reactions() const override {
-        return {
-            {"", ""},
-            {"", ""}
-        };
-    }
-};*/
-
 class Goblin : public MonsterType {
 public:
     QString name() const override { return "Goblin";}
@@ -283,3 +242,162 @@ public:
         };
     }
 };
+
+class Bugbear : public MonsterType {
+public:
+    QString name() const override { return "Bugbear";}
+    int baseAC() const override { return 16;}
+    QString hpDice() const override { return "5d8 +5";}
+    int speed() const override { return 30;}
+    int burrow() const override { return 0;}
+    int climb() const override { return 0;}
+    int fly() const override { return 0;}
+    int swim() const override { return 0;}
+    Attributes attributes() const override {
+        return Attributes{ 15, 14, 13, 8, 11, 9}; //str, dex, con, int, wis, cha
+    }
+    QString saving_throws() const override { return "";}
+    QString skills() const override { return "Stealth +6, Survival +2";}
+    QString vulnerabilities() const override { return "";}
+    QString resistances() const override { return "";}
+    QString immunities() const override { return "";}
+    QString senses() const override { return "darkvision 60ft., p.P. 10";}
+    QString languages() const override { return "Common, Goblin";}
+    QList<Trait> traits() const override {
+        return {
+            {"Brute", "attacks do one extra die of its damage(included in attack)"},
+            {"Surprise Attack", "if the bugbear surprises a creature and attacks it in the first round, target takes extra 2d6 damage"}
+        };
+    }
+    QList<Action> actions() const override {
+        return {
+            {"Morningstar", "+4 to hit", "2d8 +2", "piercing"},
+            {"Javelin", "+4 to hit", "2d6 +2", "piercing"}
+        };
+    }
+    QList<Reaction> reactions() const override {
+        return {
+        };
+    }
+};
+
+class BugbearChief : public MonsterType {
+public:
+    QString name() const override { return "Bugbear Chief";}
+    int baseAC() const override { return 17;}
+    QString hpDice() const override { return "10d8 +20";}
+    int speed() const override { return 30;}
+    int burrow() const override { return 0;}
+    int climb() const override { return 0;}
+    int fly() const override { return 0;}
+    int swim() const override { return 0;}
+    Attributes attributes() const override {
+        return Attributes{ 17, 14, 14, 11, 12, 11}; //str, dex, con, int, wis, cha
+    }
+    QString saving_throws() const override { return "";}
+    QString skills() const override { return "Intimidation +2, Stealth +6, Survival +3";}
+    QString vulnerabilities() const override { return "";}
+    QString resistances() const override { return "";}
+    QString immunities() const override { return "";}
+    QString senses() const override { return ",darkvision 60ft. p.P. 11";}
+    QString languages() const override { return "Common, Goblin";}
+    QList<Trait> traits() const override {
+        return {
+            {"Brute", "attacks do one extra die of its damage(included in attack)"},
+            {"Surprise Attack", "if the bugbear surprises a creature and attacks it in the first round, target takes extra 2d6 damage"},
+            {"Heart of Hruggek", "has advantage on saving throws against being charmed, frightened, paralyzed, poisoned, stunned or put to sleep"}
+        };
+    }
+    QList<Action> actions() const override {
+        return {
+            {"Multiattack", "make two melee attacks", "", ""},
+            {"Morningstar", "+5 to hit", "2d8 +3", "piercing"},
+            {"Javelin", "+5 to hit", "2d6 +3", "piercing"}
+        };
+    }
+    QList<Reaction> reactions() const override {
+        return {
+        };
+    }
+};
+
+class Doppelganger : public MonsterType {
+public:
+    QString name() const override { return "Doppelganger";}
+    int baseAC() const override { return 14;}
+    QString hpDice() const override { return "8d8 +16";}
+    int speed() const override { return 30;}
+    int burrow() const override { return 0;}
+    int climb() const override { return 0;}
+    int fly() const override { return 0;}
+    int swim() const override { return 0;}
+    Attributes attributes() const override {
+        return Attributes{ 11, 18, 14, 11, 12, 14}; //str, dex, con, int, wis, cha
+    }
+    QString saving_throws() const override { return "";}
+    QString skills() const override { return "Deception +6, Insight +3";}
+    QString vulnerabilities() const override { return "";}
+    QString resistances() const override { return "";}
+    QString immunities() const override { return "charmed";}
+    QString senses() const override { return "darkvision 60ft., p.P. 11";}
+    QString languages() const override { return "Common";}
+    QList<Trait> traits() const override {
+        return {
+            {"Shapechanger", "as an action polymorph into a small or medium humanoid it has seen"},
+            {"Ambusher", "in the first round of combat have advantage on attack rolls"},
+            {"Surprise Attack", "if the doppelganger surprises a creature and attacks it in the first round, target takes extra 3d6 damage"}
+        };
+    }
+    QList<Action> actions() const override {
+        return {
+            {"Multiattack", "make two melee attacks", "", ""},
+            {"Slam", "+6 to hit", "1d6 +4", "bludgeoning"},
+            {"Read Thoughts", "can read surface thoughts  of one creature within 60ft.", "Can be blocket by 3ft. wood, 2ft. stone, 2in. metal or sheet of lead.", "While reading thought have advantage on insight, deception, intimidation and persuasion"}
+        };
+    }
+    QList<Reaction> reactions() const override {
+        return {
+        };
+    }
+};
+
+/*
+class  : public MonsterType {
+public:
+    QString name() const override { return "";}
+    int baseAC() const override { return ;}
+    QString hpDice() const override { return "";}
+    int speed() const override { return ;}
+    int burrow() const override { return ;}
+    int climb() const override { return ;}
+    int fly() const override { return ;}
+    int swim() const override { return ;}
+    Attributes attributes() const override {
+        return Attributes{ , , , , , }; //str, dex, con, int, wis, cha
+    }
+    QString saving_throws() const override { return "";}
+    QString skills() const override { return "";}
+    QString vulnerabilities() const override { return "";}
+    QString resistances() const override { return "";}
+    QString immunities() const override { return "";}
+    QString senses() const override { return ", p.P. ";}
+    QString languages() const override { return "";}
+    QList<Trait> traits() const override {
+        return {
+            {"", ""},
+            {"", ""}
+        };
+    }
+    QList<Action> actions() const override {
+        return {
+            {"", " to hit", "", ""},
+            {"", " to hit", "", ""}
+        };
+    }
+    QList<Reaction> reactions() const override {
+        return {
+            {"", ""},
+            {"", ""}
+        };
+    }
+};*/
