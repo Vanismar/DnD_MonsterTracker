@@ -13,9 +13,19 @@ struct Attributes {
 
 struct Action {
     QString name;
-    int toHitModifier;
+    QString toHit;
     QString damageDice;
     QString damageType;
+};
+
+struct Trait {
+    QString name;
+    QString detail;
+};
+
+struct Reaction {
+    QString name;
+    QString detail;
 };
 
 class MonsterType {
@@ -36,7 +46,9 @@ public:
     virtual QString immunities() const = 0;
     virtual QString senses() const = 0;
     virtual QString languages() const = 0;
+    virtual QList<Trait> traits() const = 0;
     virtual QList<Action> actions() const = 0;
+    virtual QList<Reaction> reactions() const = 0;
 
     virtual ~MonsterType() = default;
 };
@@ -62,10 +74,22 @@ public:
     QString immunities() const override { return "";}
     QString senses() const override { return ", p.P. ";}
     QString languages() const override { return "";}
-    QList<MonsterAction> actions() const override {
+    QList<Trait> traits() const override {
         return {
-            {"", +, "", ""},
-            {"", +, "", ""}
+            {"", ""},
+            {"", ""}
+        };
+    }
+    QList<Action> actions() const override {
+        return {
+            {"", " to hit", "", ""},
+            {"", " to hit", "", ""}
+        };
+    }
+    QList<Reaction> reactions() const override {
+        return {
+            {"", ""},
+            {"", ""}
         };
     }
 };*/
@@ -90,10 +114,19 @@ public:
     QString immunities() const override { return "";}
     QString senses() const override { return "darkvision 60ft, p.P. 9";}
     QString languages() const override { return "Common, Goblin";}
+    QList<Trait> traits() const override {
+        return {
+            {"Nible Escape", "Can take Disengage or Hide as a bonus action"}
+        };
+    }
     QList<Action> actions() const override {
         return {
-            {"Scimitar", +4, "1d6 +2", "slashing"},
-            {"Shortbow", +4, "1d6 +2", "piercing"}
+            {"Scimitar", "+4 to hit,", "1d6 +2", "slashing"},
+            {"Shortbow", "+4 to hit,", "1d6 +2", "piercing"}
+        };
+    }
+    QList<Reaction> reactions() const override {
+        return {
         };
     }
 };
@@ -118,10 +151,20 @@ public:
     QString immunities() const override { return "";}
     QString senses() const override { return "darkvision 60ft, p.P. 9";}
     QString languages() const override { return "Common, Goblin";}
+    QList<Trait> traits() const override {
+        return {
+            {"Nible Escape", "Can take Disengage or Hide as a bonus action"},
+            {"Multiattack", "Makes two attacks with Scimitar. Second attack has disadvantage"}
+        };
+    }
     QList<Action> actions() const override {
         return {
-            {"Scimitar", +4, "1d6 +2", "slashing"},
-            {"Javelin", +2, "1d6", "piercing"}
+            {"Scimitar", "+4 to hit,", "1d6 +2", "slashing"},
+            {"Javelin", "+2 to hit,", "1d6", "piercing"}
+        };
+    }
+    QList<Reaction> reactions() const override {
+        return {
         };
     }
 };
@@ -130,7 +173,7 @@ class Orc : public MonsterType {
 public:
     QString name() const override { return "Orc";}
     int baseAC() const override { return 13;}
-    QString hpDice() const override { return "2d8 + 6";}
+    QString hpDice() const override { return "2d8 +6";}
     int speed() const override { return 30;}
     int burrow() const override { return 0;}
     int climb() const override { return 0;}
@@ -146,12 +189,97 @@ public:
     QString immunities() const override { return "";}
     QString senses() const override { return "darkvision 60ft, p.P. 10";}
     QString languages() const override { return "Common, Orc";}
+    QList<Trait> traits() const override {
+        return {
+            {"Aggressive", "As a bonus action, can move up to its speed toward a hostile"}
+        };
+    }
     QList<Action> actions() const override {
         return {
-            {"Greataxe", +5, "1d12 +3", "slashing"},
-            {"Javelin", +5, "1d6 +3", "piercing"}
+            {"Greataxe", "+5 to hit,", "1d12 +3", "slashing"},
+            {"Javelin", "+5 to hit,", "1d6 +3", "piercing"}
+        };
+    }
+    QList<Reaction> reactions() const override {
+        return {
         };
     }
 };
 
+class Spectator : public MonsterType {
+public:
+    QString name() const override { return "Spectator";}
+    int baseAC() const override { return 14;}
+    QString hpDice() const override { return "6d8 +12";}
+    int speed() const override { return 0;}
+    int burrow() const override { return 0;}
+    int climb() const override { return 0;}
+    int fly() const override { return 30;}
+    int swim() const override { return 0;}
+    Attributes attributes() const override {
+        return Attributes{ 8, 14, 14, 13, 14, 11}; //str, dex, con, int, wis, cha
+    }
+    QString saving_throws() const override { return "";}
+    QString skills() const override { return "Perception +6";}
+    QString vulnerabilities() const override { return "";}
+    QString resistances() const override { return "";}
+    QString immunities() const override { return "prone";}
+    QString senses() const override { return "darkvision 120ft., p.P. 16";}
+    QString languages() const override { return "Deep Speech, Undercommon, telepathy 120 ft.";}
+    QList<Trait> traits() const override {
+        return {
+        };
+    }
+    QList<Action> actions() const override {
+        return {
+            {"Bite", "+1 to hit,", "1d6 -1", "piercing"},
+            {"Eye Rays", "shoot up to two eye rays at one or two creatures it can see within 90ft.", "Each ray can be used only once a turn", ""},
+            {"Confusion Ray", "DC 13 Wis,", "on fail it can't take reactions until end of its next turn", "target can't move and attacks a random target in range"},
+            {"Paralyzing Ray", "DC 13 Con,", "on fail become paralyzed for 1min.", "The target can repeat the saving throw at the end of it's turns"},
+            {"Fear Ray", "DC 13 Wis,", "on fail become frightened for 1min.", "The target can repeat the saving throw at the end of it's turns, with disadvantage if the spectator is visible"},
+            {"Wounding Ray", "DC 13 Con,", "on fail take 3d10 necrotic damage.", "On success take half damage"},
+            {"Create Food and Water", "creates enough food and water to sustain itself for 24 hours", "", ""}
+        };
+    }
+    QList<Reaction> reactions() const override {
+        return {
+            {"Spell reflection", "if saved against a spell, or the spell misses.The spectator can redirect it at another creature within 30ft."}
+        };
+    }
+};
 
+class TwigBlight : public MonsterType {
+public:
+    QString name() const override { return "Twig Blight";}
+    int baseAC() const override { return 13;}
+    QString hpDice() const override { return "1d6 +1";}
+    int speed() const override { return 20;}
+    int burrow() const override { return 0;}
+    int climb() const override { return 0;}
+    int fly() const override { return 0;}
+    int swim() const override { return 0;}
+    Attributes attributes() const override {
+        return Attributes{ 6, 13, 12, 4, 8, 3}; //str, dex, con, int, wis, cha
+    }
+    QString saving_throws() const override { return "";}
+    QString skills() const override { return "Stealth +3";}
+    QString vulnerabilities() const override { return "fire";}
+    QString resistances() const override { return "";}
+    QString immunities() const override { return "Blinded, deafened";}
+    QString senses() const override { return "blindsight 60ft., p.P. 9";}
+    QString languages() const override { return "Common(only understands)";}
+    QList<Trait> traits() const override {
+        return {
+            {"False Appearance", "While motionless, it is indistinguishable from a dead shrub"}
+        };
+    }
+    QList<Action> actions() const override {
+        return {
+            {"Claws", "+3 to hit", "1d4 +1", "piercing"}
+        };
+    }
+    QList<Reaction> reactions() const override {
+        return {
+        };
+    }
+};
