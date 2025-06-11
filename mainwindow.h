@@ -33,5 +33,6 @@ private:
 private slots:
     void removeMonster(MonsterWidget *widget);
     void openStatBlock();
+    void openConditions();
 
 };

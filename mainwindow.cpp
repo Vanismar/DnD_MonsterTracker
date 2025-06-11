@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "AddMonsterDialog.h"
 #include "MonsterFactory.h"
+#include "conditions.h"
 #include <QToolBar>
 #include <QAction>
 #include <QScrollArea>
@@ -17,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     QAction *viewStatBlockAction = toolbar->addAction("View Stat Block");
     connect(viewStatBlockAction, &QAction::triggered, this, &MainWindow::openStatBlock);
+
+    QAction *viewConditions = toolbar->addAction("View Conditions");
+    connect(viewConditions, &QAction::triggered, this, &MainWindow::openConditions);
 
     monsterFlowLayout = new FlowLayout(5, 10, 10);
     auto *container = new QWidget;
@@ -109,4 +113,11 @@ void MainWindow::openStatBlock() {
         statBlocks[selected]->raise();
         statBlocks[selected]->activateWindow();
     }
+}
+
+void MainWindow::openConditions() {
+    auto *window = new ConditionsWindow(this);
+    window->setAttribute(Qt::WA_DeleteOnClose);
+    window->setWindowFlags(Qt::Window);
+    window->show();
 }

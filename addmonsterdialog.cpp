@@ -9,9 +9,15 @@ AddMonsterDialog::AddMonsterDialog(QWidget *parent)
     QVBoxLayout *layout = new QVBoxLayout(this);
 
     monsterTypeCombo = new QComboBox();
-    monsterTypeCombo->addItems({
-        "Bugbear", "Bugbear Chief", "Doppelganger","Goblin", "Goblin Boss", "Orc", "Spectator", "Twig Blight"
+    QStringList monsterTypes = {
+        "Bugbear", "Bugbear Chief", "Doppelganger", "Goblin", "Goblin Boss", "Orc", "Spectator", "Twig Blight"
+    };
+
+    std::sort(monsterTypes.begin(), monsterTypes.end(), [](const QString &a, const QString &b) {
+        return a.toLower() < b.toLower();  // Case-insensitive
     });
+
+    monsterTypeCombo->addItems(monsterTypes);
 
     monsterCountSpin = new QSpinBox();
     monsterCountSpin->setRange(1, 50);
