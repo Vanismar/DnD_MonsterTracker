@@ -15,14 +15,16 @@ public:
     explicit MonsterStatBlock(const MonsterType& type, QWidget *parent = nullptr);
 
     void setActions(const QList<Action> &actions);
-    void setTraits(const QList<Trait> &traits);
-    void setReactions(const QList<Reaction> &reactions);
+    void setTraits(const QList<Action> &traits);
+    void setReactions(const QList<Action> &reactions);
+    void setLegendaries(const QList<Action> &legendaries);
 
 private:
     QVBoxLayout *mainLayout;
     QLabel *actionsLabel;
     QLabel *traitsLabel;
     QLabel *reactionsLabel;
+    QLabel *legendariesLabel;
 
     inline int abilityModifier(int score) {
         return std::floor((score - 10) / 2.0);
