@@ -29,10 +29,15 @@ private:
     QSet<QString> usedMonsterTypes;
     int monsterCount = 0;
     FlowLayout *monsterFlowLayout = nullptr;
+    QLabel *turnCounterLabel;
+    int turn = 1;
 
 private slots:
     void removeMonster(MonsterWidget *widget);
     void openStatBlock();
     void openConditions();
+    void decreaseTurn();
+    void incrementTurn();
+    void resetTurn();
 
 };

@@ -20,7 +20,7 @@ AddMonsterDialog::AddMonsterDialog(QWidget *parent)
         "Young Bronze Dragon", "Bronze Dragon Wyrmling", "Ancient Copper Dragon", "Adult Copper Dragon", "Young Copper Dragon", "Copper Dragon Wyrmling",
         "Ancient Gold Dragon", "Adult Gold Dragon", "Young Gold Dragon", "Gold Dragon Wyrmling", "Ancient Silver Dragon", "Adult Silver Dragon",
         "Young Silver Dragon", "Silver Dragon Wyrmling", "Vampire Spawn", "Vampire Fledgling", "Vampire Knight", "Vampire baron", "Vampire Viscount", "Vampire Count",
-        "Vampire Duke"
+        "Vampire Duke", "Swarm of Bats", "Swarm of Rats", "Wolf"
     };
 
     std::sort(monsterTypes.begin(), monsterTypes.end(), [](const QString &a, const QString &b) {

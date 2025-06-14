@@ -2336,6 +2336,100 @@ public:
     };}
 };
 
+class SwarmofBats : public MonsterType {
+public:
+    QString name() const override { return "Swarm of Bats";}
+    int baseAC() const override { return 12;}
+    QString hpDice() const override { return "5d8";}
+    int speed() const override { return 0;}
+    int burrow() const override { return 0;}
+    int climb() const override { return 0;}
+    int fly() const override { return 30;}
+    int swim() const override { return 0;}
+    Attributes attributes() const override { return Attributes{ 5, 15, 10, 2, 12,4 };} //str, dex, con, int, wis, cha
+    QString saving_throws() const override { return "";}
+    QString skills() const override { return "";}
+    QString vulnerabilities() const override { return "";}
+    QString resistances() const override { return "bludgeoning, piercing, slashing, charmed, frightened, grappled, paralyzed, petrified, prone, restrained, stunned";}
+    QString immunities() const override { return "";}
+    QString senses() const override { return "blindsight 60ft., p.P. 11";}
+    QString languages() const override { return "";}
+    QList<Action> traits() const override { return {
+        {"Echolocation", "Can't use blindsight if deafened"},
+        {"Keen Hearing", "Has advantage on Perception checks that rely on hearing."},
+        {"Swarm", "Can ocuppy another creature's space and vice versa, and the swarm can move through any opening large enough for a tiny bat. The swarm can't regain hp or gain temporary hp."}
+    };}
+    QList<Action> actions() const override { return {
+        {"Bites", "+4 to hit, reach 0ft., 2d4 piercing or 1d4 piercing, if under half of total hp"}
+    };}
+    QList<Action> reactions() const override { return {
+    };}
+    QList<Action> legendaries() const override { return {
+    };}
+};
+
+class SwarmofRats : public MonsterType {
+public:
+    QString name() const override { return "Swarm of Rats";}
+    int baseAC() const override { return 10;}
+    QString hpDice() const override { return "7d8 -7";}
+    int speed() const override { return 30;}
+    int burrow() const override { return 0;}
+    int climb() const override { return 0;}
+    int fly() const override { return 0;}
+    int swim() const override { return 0;}
+    Attributes attributes() const override { return Attributes{ 9, 11, 9, 2, 10, 3};} //str, dex, con, int, wis, cha
+    QString saving_throws() const override { return "";}
+    QString skills() const override { return "";}
+    QString vulnerabilities() const override { return "";}
+    QString resistances() const override { return "bludgeoning, piercing, slashing, charmed, frightened, grappled, paralyzed, petrified, prone, restrained, stunned";}
+    QString immunities() const override { return "";}
+    QString senses() const override { return "darkvision 30ft., p.P. 10";}
+    QString languages() const override { return "";}
+    QList<Action> traits() const override { return {
+        {"Keen Smell", "Has advantage on Perception checks that rely on smell."},
+        {"Swarm", "Can ocuppy another creature's space and vice versa, and the swarm can move through any opening large enough for a tiny rat. The swarm can't regain hp or gain temporary hp."}
+    };}
+    QList<Action> actions() const override { return {
+        {"Bites", "+2 to hit, reach 0ft., 2d6 piercing or 1d6 piercing, if under half of total hp"}
+    };}
+    QList<Action> reactions() const override { return {
+    };}
+    QList<Action> legendaries() const override { return {
+    };}
+};
+
+class Wolf : public MonsterType {
+public:
+    QString name() const override { return "Wolf";}
+    int baseAC() const override { return 13;}
+    QString hpDice() const override { return "2d8 +2";}
+    int speed() const override { return 40;}
+    int burrow() const override { return 0;}
+    int climb() const override { return 0;}
+    int fly() const override { return 0;}
+    int swim() const override { return 0;}
+    Attributes attributes() const override { return Attributes{ 12, 15, 12, 3, 12, 6};} //str, dex, con, int, wis, cha
+    QString saving_throws() const override { return "";}
+    QString skills() const override { return "Perception +3, Stealth +4";}
+    QString vulnerabilities() const override { return "";}
+    QString resistances() const override { return "";}
+    QString immunities() const override { return "";}
+    QString senses() const override { return "p.P. 13";}
+    QString languages() const override { return "";}
+    QList<Action> traits() const override { return {
+        {"Keen Hearing and Smell", "Has advantage on Perception checks that rely on hearing or smell."},
+        {"Pack Tactics", "Has advantage on attack rolls against a creature if at least one of the wolf's allies is within 5ft.of the creature and the allie isn't incapacitated"}
+    };}
+    QList<Action> actions() const override { return {
+        {"Bite", "+4 to hit, reach 5ft., 2d4 +2 piercing. DC 11 Str, on fail be knocked prone."}
+    };}
+    QList<Action> reactions() const override { return {
+    };}
+    QList<Action> legendaries() const override { return {
+    };}
+};
+
 class VampireSpawn : public MonsterType {
 public:
     QString name() const override { return "Vampire Spawn";}
@@ -2373,17 +2467,271 @@ public:
     };}
 };
 
+class VampireFledgling : public MonsterType {
+public:
+    QString name() const override { return "Vampire Fledgling";}
+    int baseAC() const override { return 15;}
+    QString hpDice() const override { return "12d8 +36";}
+    int speed() const override { return 30;}
+    int burrow() const override { return 0;}
+    int climb() const override { return 0;}
+    int fly() const override { return 0;}
+    int swim() const override { return 0;}
+    Attributes attributes() const override { return Attributes{ 16, 16, 16, 12, 11, 12};} //str, dex, con, int, wis, cha
+    QString saving_throws() const override { return "Dex +6, Wis +3";}
+    QString skills() const override { return "Perception +3, Stealth +6";}
+    QString vulnerabilities() const override { return "";}
+    QString resistances() const override { return "necrotic; bludgeoning, piercing and slashin from nonmagical attacks";}
+    QString immunities() const override { return "";}
+    QString senses() const override { return "darkvision 60ft., p.P. 13";}
+    QString languages() const override { return "languages it knew in life";}
+    QList<Action> traits() const override { return {
+        {"Regeneration", "Regain 12hp at the start of its turn, if it has atleast 1hp and isn't standing in sunlight or running water. Taking radiant stops regeneration next turn"},
+        {"Spider Climb", "Can climb difficult surfaces, including upside down on ceilings, without ability checks"},
+        {"Forbiddance", "Can't enter a residence without and invitation from an occupant."},
+        {"Harmed by Running Water", "Take 20 acid when ending its turn in running water."},
+        {"Stake to the Heart", "Is destroyed if a piercing weapon made of wood is driven into its heart while incapacitated in its resting place."},
+        {"Sunlight Hypersensitivity", "Take 20 radiant when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability checks."}
+    };}
+    QList<Action> actions() const override { return {
+        {"Multiattack", "Make two attacks, only one can be bite"},
+        {"Claws", "+6 to hit, reach 5ft., 2d4 +3 slashing. Instead of doing damage can grapple(escape DC 14)"},
+        {"Bite", "+6 to hit, reach 5ft., 1d6 +3 piercing and 2d6 necrotic. Vampire heals for the necrotic amount it deals. Target has to be willing, grappled, incapacitated or restrained"}
+    };}
+    QList<Action> reactions() const override { return {
+    };}
+    QList<Action> legendaries() const override { return {
+    };}
+};
 
+class VampireKnight : public MonsterType {
+public:
+    QString name() const override { return "Vampire Knight";}
+    int baseAC() const override { return 16;}
+    QString hpDice() const override { return "14d8 +42";}
+    int speed() const override { return 30;}
+    int burrow() const override { return 0;}
+    int climb() const override { return 0;}
+    int fly() const override { return 0;}
+    int swim() const override { return 0;}
+    Attributes attributes() const override { return Attributes{ 17, 17, 17, 14, 12, 14};} //str, dex, con, int, wis, cha
+    QString saving_throws() const override { return "Dex +7, Wis +5, Cha +6";}
+    QString skills() const override { return "Perception +5, Stealth +7";}
+    QString vulnerabilities() const override { return "";}
+    QString resistances() const override { return "necrotic; bludgeoning, piercing and slashin from nonmagical attacks";}
+    QString immunities() const override { return "";}
+    QString senses() const override { return "darkvision 60ft., p.P. 15";}
+    QString languages() const override { return "languages it knew in life";}
+    QList<Action> traits() const override { return {
+        {"Misty Escape", "When droped to 0hp while outside of resting place, transforms into a mist instead of falling unconscious, provided that isn't in sunlight or running water. It then travels to its resting place and is paralyzed for atleast 1 hour untill it regains 1hp"},
+        {"Regeneration", "Regain 14hp at the start of its turn, if it has atleast 1hp and isn't standing in sunlight or running water. Taking radiant stops regeneration next turn"},
+        {"Spider Climb", "Can climb difficult surfaces, including upside down on ceilings, without ability checks"},
+        {"Forbiddance", "Can't enter a residence without and invitation from an occupant."},
+        {"Harmed by Running Water", "Take 20 acid when ending its turn in running water."},
+        {"Stake to the Heart", "If a piercing weapon made of wood is driven into its heart while incapacitated in its resting place, become paralyzed untill the stake is removed."},
+        {"Sunlight Hypersensitivity", "Take 20 radiant when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability checks."},
+        {"Sanguine Weapon", "Weapon attack deal additional 1d4 necrotic. The vampire heals for the necrotic done. Already included in attaks"}
+    };}
+    QList<Action> actions() const override { return {
+        {"Multiattack", "Make two attacks, only one can be bite"},
+        {"Unarmed Strike", "+7 to hit, reach 5ft., 1d8 +3 bludgeoning. Instead of doing damage can grapple(escape DC 15)"},
+        {"Rapier", "+7 to hit, reach 5ft., 1d8 +3 piercing and 1d4 necrotic(Sanguine Weapon)"},
+        {"Bite", "+7 to hit, reach 5ft., 1d6 +3 piercing and 2d6 necrotic. Vampire heals for the necrotic amount it deals. Target has to be willing, grappled, incapacitated or restrained"},
+        {"Children of the Night(1/day)", "Magically cals 1d4 swarms of bats or rats, provided the sun isn't up. While outdoors can call 1d6 wolves instead. The called creatures arrive in 1d4 rounds, act as allies and obey the vampire. The beasts remain for 1 hour, until vampire dies or are dismissed."}
+    };}
+    QList<Action> reactions() const override { return {
+    };}
+    QList<Action> legendaries() const override { return {
+    };}
+};
 
+class VampireBaron : public MonsterType {
+public:
+    QString name() const override { return "Vampire Baron";}
+    int baseAC() const override { return 16;}
+    QString hpDice() const override { return "15d8 +45";}
+    int speed() const override { return 30;}
+    int burrow() const override { return 0;}
+    int climb() const override { return 0;}
+    int fly() const override { return 0;}
+    int swim() const override { return 0;}
+    Attributes attributes() const override { return Attributes{ 17, 17, 17, 15, 13, 15};} //str, dex, con, int, wis, cha
+    QString saving_throws() const override { return "Dex +7, Wis +5, Cha +6";}
+    QString skills() const override { return "Perception +5, Stealth +7";}
+    QString vulnerabilities() const override { return "";}
+    QString resistances() const override { return "necrotic; bludgeoning, piercing and slashin from nonmagical attacks";}
+    QString immunities() const override { return "";}
+    QString senses() const override { return "darkvision 90ft., p.P. 15";}
+    QString languages() const override { return "languages it knew in life";}
+    QList<Action> traits() const override { return {
+        {"Shapechanger", "If not in sunlight or running water, can use its action to turn into a bat(speed becomes 5ft., fly becomes 30ft.) or mist(fly becomes 20ft., has advantage on Str, Dex and Con saves. Is immune to all nonmagic damage except sunlight)."},
+        {"Legendary Resistance(3/day)", "If fails a saving throws, it can choose to succeed insted"},
+        {"Misty Escape", "When droped to 0hp while outside of resting place, transforms into a mist instead of falling unconscious, provided that isn't in sunlight or running water. It then travels to its resting place and is paralyzed for atleast 1 hour untill it regains 1hp"},
+        {"Regeneration", "Regain 16hp at the start of its turn, if it has atleast 1hp and isn't standing in sunlight or running water. Taking radiant stops regeneration next turn"},
+        {"Spider Climb", "Can climb difficult surfaces, including upside down on ceilings, without ability checks"},
+        {"Forbiddance", "Can't enter a residence without and invitation from an occupant."},
+        {"Harmed by Running Water", "Take 20 acid when ending its turn in running water."},
+        {"Stake to the Heart", "If a piercing weapon made of wood is driven into its heart while incapacitated in its resting place, become paralyzed untill the stake is removed."},
+        {"Sunlight Hypersensitivity", "Take 20 radiant when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability checks."},
+        {"Sanguine Weapon", "Weapon attack deal additional 1d6 necrotic. The vampire heals for the necrotic done. Already included in attaks"}
+    };}
+    QList<Action> actions() const override { return {
+        {"Multiattack", "Make two attacks, only one can be bite"},
+        {"Unarmed Strike", "+7 to hit, reach 5ft., 1d8 +3 bludgeoning. Instead of doing damage can grapple(escape DC 16)"},
+        {"Rapier", "+7 to hit, reach 5ft., 1d8 +3 piercing and 1d6 necrotic(Sanguine Weapon)"},
+        {"Bite", "+7 to hit, reach 5ft., 1d6 +3 piercing and 3d6 necrotic. Vampire heals for the necrotic amount it deals. Target has to be willing, grappled, incapacitated or restrained"},
+        {"Charm", "Target one humanoid it can see within 30ft., DC 15 wis save, on fail  become charmed is treated as a willing target for bite. Each time anything harmful is done to the target they can repeat the save, otherwise effect lasts 24hours or untill Vampire is destroyed, or on a different plane."},
+        {"Children of the Night(1/day)", "Magically cals 2d4 swarms of bats or rats, provided the sun isn't up. While outdoors can call 2d6 wolves instead. The called creatures arrive in 1d4 rounds, act as allies and obey the vampire. The beasts remain for 1 hour, until vampire dies or are dismissed."}
+    };}
+    QList<Action> reactions() const override { return {
+    };}
+    QList<Action> legendaries() const override { return {
+        {"Move", "Can move up to its speed without provoking opportunity attack"},
+        {"Unarmed Strike", "Make one unarmed strike"},
+        {"Bite(Costs 2)", "Make one bite "}
+    };}
+};
 
+class VampireViscount : public MonsterType {
+public:
+    QString name() const override { return "Vampire Viscount";}
+    int baseAC() const override { return 17;}
+    QString hpDice() const override { return "17d8 +53";}
+    int speed() const override { return 30;}
+    int burrow() const override { return 0;}
+    int climb() const override { return 0;}
+    int fly() const override { return 0;}
+    int swim() const override { return 0;}
+    Attributes attributes() const override { return Attributes{ 18, 18, 18, 16, 14, 16};} //str, dex, con, int, wis, cha
+    QString saving_throws() const override { return "Dex +9, Wis +7, Cha +8";}
+    QString skills() const override { return "Perception +7, Stealth +9";}
+    QString vulnerabilities() const override { return "";}
+    QString resistances() const override { return "necrotic; bludgeoning, piercing and slashin from nonmagical attacks";}
+    QString immunities() const override { return "";}
+    QString senses() const override { return "darkvision 120ft., p.P. 17";}
+    QString languages() const override { return "languages it knew in life";}
+    QList<Action> traits() const override { return {
+        {"Shapechanger", "If not in sunlight or running water, can use its action to turn into a bat(speed becomes 5ft., fly becomes 30ft.) or mist(fly becomes 20ft., has advantage on Str, Dex and Con saves. Is immune to all nonmagic damage except sunlight)."},
+        {"Legendary Resistance(3/day)", "If fails a saving throws, it can choose to succeed insted"},
+        {"Misty Escape", "When droped to 0hp while outside of resting place, transforms into a mist instead of falling unconscious, provided that isn't in sunlight or running water. It then travels to its resting place and is paralyzed for atleast 1 hour untill it regains 1hp"},
+        {"Regeneration", "Regain 18hp at the start of its turn, if it has atleast 1hp and isn't standing in sunlight or running water. Taking radiant stops regeneration next turn"},
+        {"Spider Climb", "Can climb difficult surfaces, including upside down on ceilings, without ability checks"},
+        {"Forbiddance", "Can't enter a residence without and invitation from an occupant."},
+        {"Harmed by Running Water", "Take 20 acid when ending its turn in running water."},
+        {"Stake to the Heart", "If a piercing weapon made of wood is driven into its heart while incapacitated in its resting place, become paralyzed untill the stake is removed."},
+        {"Sunlight Hypersensitivity", "Take 20 radiant when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability checks."},
+        {"Sanguine Weapon", "Weapon attack deal additional 2d6 necrotic. The vampire heals for the necrotic done. Already included in attaks"}
+    };}
+    QList<Action> actions() const override { return {
+        {"Multiattack", "Make two attacks, only one can be bite"},
+        {"Unarmed Strike", "+9 to hit, reach 5ft., 1d8 +4 bludgeoning. Instead of doing damage can grapple(escape DC 17)"},
+        {"Rapier", "+9 to hit, reach 5ft., 1d8 +4 piercing and 2d6 necrotic(Sanguine Weapon)"},
+        {"Bite", "+9 to hit, reach 5ft., 1d6 +4 piercing and 3d6 necrotic. Vampire heals for the necrotic amount it deals. Target has to be willing, grappled, incapacitated or restrained"},
+        {"Charm", "Target one humanoid it can see within 30ft., DC 16 wis save, on fail  become charmed is treated as a willing target for bite. Each time anything harmful is done to the target they can repeat the save, otherwise effect lasts 24hours or untill Vampire is destroyed, or on a different plane."},
+        {"Children of the Night(1/day)", "Magically cals 3d4 swarms of bats or rats, provided the sun isn't up. While outdoors can call 3d6 wolves instead. The called creatures arrive in 1d4 rounds, act as allies and obey the vampire. The beasts remain for 1 hour, until vampire dies or are dismissed."}
+    };}
+    QList<Action> reactions() const override { return {
+    };}
+    QList<Action> legendaries() const override { return {
+        {"Move", "Can move up to its speed without provoking opportunity attack"},
+        {"Unarmed Strike", "Make one unarmed strike"},
+        {"Bite(Costs 2)", "Make one bite "}
+    };}
+};
 
+class VampireCount : public MonsterType {
+public:
+    QString name() const override { return "Vampire Count";}
+    int baseAC() const override { return 17;}
+    QString hpDice() const override { return "15d10 +52";}
+    int speed() const override { return 30;}
+    int burrow() const override { return 0;}
+    int climb() const override { return 0;}
+    int fly() const override { return 0;}
+    int swim() const override { return 0;}
+    Attributes attributes() const override { return Attributes{ 18, 18, 18, 17, 15, 17};} //str, dex, con, int, wis, cha
+    QString saving_throws() const override { return "Dex +9, Wis +7, Cha +8";}
+    QString skills() const override { return "Perception +7, Stealth +9";}
+    QString vulnerabilities() const override { return "";}
+    QString resistances() const override { return "necrotic; bludgeoning, piercing and slashin from nonmagical attacks";}
+    QString immunities() const override { return "";}
+    QString senses() const override { return "darkvision 120ft., p.P. 17";}
+    QString languages() const override { return "languages it knew in life";}
+    QList<Action> traits() const override { return {
+        {"Shapechanger", "If not in sunlight or running water, can use its action to turn into a bat(speed becomes 5ft., fly becomes 30ft.) or mist(fly becomes 20ft., has advantage on Str, Dex and Con saves. Is immune to all nonmagic damage except sunlight)."},
+        {"Legendary Resistance(3/day)", "If fails a saving throws, it can choose to succeed insted"},
+        {"Misty Escape", "When droped to 0hp while outside of resting place, transforms into a mist instead of falling unconscious, provided that isn't in sunlight or running water. It then travels to its resting place and is paralyzed for atleast 1 hour untill it regains 1hp"},
+        {"Regeneration", "Regain 20hp at the start of its turn, if it has atleast 1hp and isn't standing in sunlight or running water. Taking radiant stops regeneration next turn"},
+        {"Spider Climb", "Can climb difficult surfaces, including upside down on ceilings, without ability checks"},
+        {"Forbiddance", "Can't enter a residence without and invitation from an occupant."},
+        {"Harmed by Running Water", "Take 20 acid when ending its turn in running water."},
+        {"Stake to the Heart", "If a piercing weapon made of wood is driven into its heart while incapacitated in its resting place, become paralyzed untill the stake is removed."},
+        {"Sunlight Hypersensitivity", "Take 20 radiant when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability checks."},
+        {"Sanguine Weapon", "Weapon attack deal additional 2d8 necrotic. The vampire heals for the necrotic done. Already included in attaks"}
+    };}
+    QList<Action> actions() const override { return {
+        {"Multiattack", "Make two attacks, only one can be bite"},
+        {"Unarmed Strike", "+9 to hit, reach 5ft., 1d8 +4 bludgeoning. Instead of doing damage can grapple(escape DC 18)"},
+        {"Rapier", "+9 to hit, reach 5ft., 1d8 +4 piercing and 2d8 necrotic(Sanguine Weapon)"},
+        {"Bite", "+9 to hit, reach 5ft., 1d6 +4 piercing and 3d6 necrotic. Vampire heals for the necrotic amount it deals. Target has to be willing, grappled, incapacitated or restrained"},
+        {"Charm", "Target one humanoid it can see within 30ft., DC 17 wis save, on fail  become charmed is treated as a willing target for bite. Each time anything harmful is done to the target they can repeat the save, otherwise effect lasts 24hours or untill Vampire is destroyed, or on a different plane."},
+        {"Children of the Night(1/day)", "Magically cals 4d4 swarms of bats or rats, provided the sun isn't up. While outdoors can call 4d6 wolves instead. The called creatures arrive in 1d4 rounds, act as allies and obey the vampire. The beasts remain for 1 hour, until vampire dies or are dismissed."}
+    };}
+    QList<Action> reactions() const override { return {
+    };}
+    QList<Action> legendaries() const override { return {
+        {"Move", "Can move up to its speed without provoking opportunity attack"},
+        {"Unarmed Strike", "Make one unarmed strike"},
+        {"Bite(Costs 2)", "Make one bite "}
+    };}
+};
 
-
-
-
-
-
-
+class VampireDuke : public MonsterType {
+public:
+    QString name() const override { return "Vampire Duke";}
+    int baseAC() const override { return 18;}
+    QString hpDice() const override { return "17d10 +64";}
+    int speed() const override { return 30;}
+    int burrow() const override { return 0;}
+    int climb() const override { return 0;}
+    int fly() const override { return 15;}
+    int swim() const override { return 0;}
+    Attributes attributes() const override { return Attributes{ 19, 19, 19, 18, 16, 18};} //str, dex, con, int, wis, cha
+    QString saving_throws() const override { return "Dex +10, Wis +9, Cha +10";}
+    QString skills() const override { return "Perception +9, Stealth +10";}
+    QString vulnerabilities() const override { return "";}
+    QString resistances() const override { return "necrotic; bludgeoning, piercing and slashin from nonmagical attacks";}
+    QString immunities() const override { return "";}
+    QString senses() const override { return "blindsight 30ft., darkvision 120ft., p.P. 19";}
+    QString languages() const override { return "languages it knew in life";}
+    QList<Action> traits() const override { return {
+        {"Shapechanger", "If not in sunlight or running water, can use its action to turn into a bat(speed becomes 5ft., fly becomes 30ft.) or mist(fly becomes 20ft., has advantage on Str, Dex and Con saves. Is immune to all nonmagic damage except sunlight)."},
+        {"Legendary Resistance(3/day)", "If fails a saving throws, it can choose to succeed insted"},
+        {"Misty Escape", "When droped to 0hp while outside of resting place, transforms into a mist instead of falling unconscious, provided that isn't in sunlight or running water. It then travels to its resting place and is paralyzed for atleast 1 hour untill it regains 1hp"},
+        {"Regeneration", "Regain 22hp at the start of its turn, if it has atleast 1hp and isn't standing in sunlight or running water. Taking radiant stops regeneration next turn"},
+        {"Spider Climb", "Can climb difficult surfaces, including upside down on ceilings, without ability checks"},
+        {"Forbiddance", "Can't enter a residence without and invitation from an occupant."},
+        {"Harmed by Running Water", "Take 20 acid when ending its turn in running water."},
+        {"Stake to the Heart", "If a piercing weapon made of wood is driven into its heart while incapacitated in its resting place, become paralyzed untill the stake is removed."},
+        {"Sunlight Hypersensitivity", "Take 20 radiant when it starts its turn in sunlight. While in sunlight, it has disadvantage on attack rolls and ability checks."},
+        {"Sanguine Weapon", "Weapon attack deal additional 2d10 necrotic. The vampire heals for the necrotic done. Already included in attaks"}
+    };}
+    QList<Action> actions() const override { return {
+        {"Multiattack", "Make two attacks, only one can be bite"},
+        {"Unarmed Strike", "+10 to hit, reach 5ft., 1d8 +4 bludgeoning. Instead of doing damage can grapple(escape DC 19)"},
+        {"Rapier", "+10 to hit, reach 5ft., 1d8 +4 piercing and 2d10 necrotic(Sanguine Weapon)"},
+        {"Bite", "+10 to hit, reach 5ft., 1d6 +4 piercing and 4d6 necrotic. Vampire heals for the necrotic amount it deals. Target has to be willing, grappled, incapacitated or restrained"},
+        {"Charm", "Target one humanoid it can see within 30ft., DC 18 wis save, on fail  become charmed is treated as a willing target for bite. Each time anything harmful is done to the target they can repeat the save, otherwise effect lasts 24hours or untill Vampire is destroyed, or on a different plane."},
+        {"Children of the Night(1/day)", "Magically cals 5d4 swarms of bats or rats, provided the sun isn't up. While outdoors can call 5d6 wolves instead. The called creatures arrive in 1d4 rounds, act as allies and obey the vampire. The beasts remain for 1 hour, until vampire dies or are dismissed."}
+    };}
+    QList<Action> reactions() const override { return {
+    };}
+    QList<Action> legendaries() const override { return {
+        {"Move", "Can move up to its speed without provoking opportunity attack"},
+        {"Unarmed Strike", "Make one unarmed strike"},
+        {"Bite(Costs 2)", "Make one bite "}
+    };}
+};
 
 /*
 class  : public MonsterType {

@@ -7,11 +7,15 @@
 #include <QScrollArea>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QLabel>
+#include <QSpacerItem>
+#include <QToolButton>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
 
     QToolBar *toolbar = addToolBar("Tools");
+    toolbar->setFixedHeight(36);
 
     QAction *addMonsterAction = toolbar->addAction("Add Monster");
     connect(addMonsterAction, &QAction::triggered, this, &MainWindow::openAddMonsterDialog);
@@ -22,6 +26,30 @@ MainWindow::MainWindow(QWidget *parent)
     QAction *viewConditions = toolbar->addAction("View Conditions");
     connect(viewConditions, &QAction::triggered, this, &MainWindow::openConditions);
 
+    QWidget *spacer = new QWidget();
+    spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    toolbar->addWidget(spacer);
+
+    turnCounterLabel = new QLabel("Turn: 1");
+    turnCounterLabel->setMinimumWidth(50);
+    toolbar->addWidget(turnCounterLabel);
+
+    QToolButton *subTurnButton = new QToolButton();
+    subTurnButton->setText("-");
+    toolbar->addWidget(subTurnButton);
+
+    QToolButton *addTurnButton = new QToolButton();
+    addTurnButton->setText("+");
+    toolbar->addWidget(addTurnButton);
+
+    QToolButton *resetTurnButton = new QToolButton();
+    resetTurnButton->setText("Reset");
+    toolbar->addWidget(resetTurnButton);
+
+    connect(subTurnButton, &QToolButton::clicked, this, &MainWindow::decreaseTurn);
+    connect(addTurnButton, &QToolButton::clicked, this, &MainWindow::incrementTurn);
+    connect(resetTurnButton, &QToolButton::clicked, this, &MainWindow::resetTurn);
+
     monsterFlowLayout = new FlowLayout(5, 10, 10);
     auto *container = new QWidget;
     container->setLayout(monsterFlowLayout);
@@ -31,7 +59,7 @@ MainWindow::MainWindow(QWidget *parent)
     scroll->setWidgetResizable(true);
     setCentralWidget(scroll);
 
-    setMinimumSize(840, 600);
+    setMinimumSize(820, 450);
 }
 
 void MainWindow::openAddMonsterDialog() {
@@ -120,4 +148,19 @@ void MainWindow::openConditions() {
     window->setAttribute(Qt::WA_DeleteOnClose);
     window->setWindowFlags(Qt::Window);
     window->show();
+}
+
+void MainWindow::decreaseTurn(){
+    --turn;
+    turnCounterLabel->setText(QString("Turn: %1").arg(turn));
+}
+
+void MainWindow::incrementTurn() {
+    ++turn;
+    turnCounterLabel->setText(QString("Turn: %1").arg(turn));
+}
+
+void MainWindow::resetTurn() {
+    turn = 1;
+    turnCounterLabel->setText("Turn: 1");
 }

@@ -74,5 +74,16 @@ std::shared_ptr<MonsterType> createMonsterType(const QString& name) {
     if (name == "Vampire Viscount") return std::make_shared<VampireViscount>();
     if (name == "Vampire Count") return std::make_shared<VampireCount>();
     if (name == "Vampire Duke") return std::make_shared<VampireDuke>();
+    if (name == "Swarm of Bats") return std::make_shared<SwarmofBats>();
+    if (name == "Swarm of Rats") return std::make_shared<SwarmofRats>();
+    if (name == "Wolf") return std::make_shared<Wolf>();
+
+
+
+
+
+
+
+
     return nullptr;
 }
